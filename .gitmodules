@@ -1,0 +1,18 @@
+[submodule "hyperleveldb"]
+	path = hyperleveldb
+	url = https://github.com/rescrv/HyperLevelDB
+[submodule "flodb"]
+	path = flodb
+	url = https://github.com/LPD-EPFL/flodb
+[submodule "rangedb"]
+	path = rangedb
+	url = https://bitbucket.org/gmargari/rangedb/
+[submodule "bench"]
+	path = bench
+	url = https://github.com/gmargari/leveldbench
+[submodule "rocksdb"]
+	path = rocksdb
+	url = https://github.com/facebook/rocksdb
+[submodule "leveldb"]
+	path = leveldb
+	url = https://github.com/google/leveldb
