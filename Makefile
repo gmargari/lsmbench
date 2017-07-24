@@ -1,7 +1,7 @@
 BINARIES = leveldb_bench rangedb_bench flodb_bench hyperleveldb_bench rocksdb_bench
 CPP_FLAGS = -Wall -Wno-sign-compare -std=c++11
 LIBRARIES = -lpthread -pthread -lsnappy
-MAKE_JOBS = -j 8 # Use multiple parallel jobs
+#MAKE_JOBS = -j 4  # Uncomment if you want to use multiple parallel jobs
 
 .PHONY = all clean init
 

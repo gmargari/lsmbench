@@ -16,7 +16,8 @@ Compile
 =======
 
 ```bash
-# Clone all repos, compile their libraries, build benchmark with each library
+# Clone all repos, compile their libraries, build benchmark with each library.
+# Edit Makefile and uncomment line "MAKE_JOBS =" to enable parallel make.
 make
 
 ```
