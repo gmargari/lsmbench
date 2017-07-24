@@ -31,17 +31,17 @@ rocksdb/librocksdb.a:
 	cd rocksdb; make $(MAKE_JOBS) static_lib
 
 leveldb_bench: bench/bench.c leveldb/out-static/libleveldb.a
-	g++ $(CPP_FLAGS) -o $@ $< -Ileveldb/include/ leveldb/out-static/libleveldb.a $(LIBRARIES) -DLEVELDB_COMPILE
+	g++ $(CPP_FLAGS) -o $@ $? -Ileveldb/include/ $(LIBRARIES) -DLEVELDB_COMPILE
 
 rangedb_bench: bench/bench.c rangedb/libleveldb.a
-	g++ $(CPP_FLAGS) -o $@ $< -Irangedb/include/ rangedb/libleveldb.a $(LIBRARIES) -DRANGEDB_COMPILE
+	g++ $(CPP_FLAGS) -o $@ $? -Irangedb/include/ $(LIBRARIES) -DRANGEDB_COMPILE
 
 flodb_bench: bench/bench.c flodb/libleveldb.a
-	g++ $(CPP_FLAGS) -o $@ $< -Iflodb/include/ flodb/libleveldb.a $(LIBRARIES) -DFLODB_COMPILE
+	g++ $(CPP_FLAGS) -o $@ $? -Iflodb/include/ $(LIBRARIES) -DFLODB_COMPILE
 
 hyperleveldb_bench: bench/bench.c hyperleveldb/.libs/libhyperleveldb.a
-	g++ $(CPP_FLAGS) -o $@ $< -Ihyperleveldb/include/ hyperleveldb/.libs/libhyperleveldb.a $(LIBRARIES) -DHYPERLEVELDB_COMPILE
+	g++ $(CPP_FLAGS) -o $@ $? -Ihyperleveldb/include/ $(LIBRARIES) -DHYPERLEVELDB_COMPILE
 
 rocksdb_bench: bench/bench.c rocksdb/librocksdb.a
-	g++ $(CPP_FLAGS) -o $@ $< -Irocksdb/include/ rocksdb/librocksdb.a $(LIBRARIES) -DROCKSDB_COMPILE
+	g++ $(CPP_FLAGS) -o $@ $? -Irocksdb/include/ $(LIBRARIES) -DROCKSDB_COMPILE
 
