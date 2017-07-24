@@ -16,3 +16,9 @@
 [submodule "leveldb"]
 	path = leveldb
 	url = https://github.com/google/leveldb
+[submodule "bashodb"]
+	path = bashodb
+	url = https://github.com/basho/leveldb
+[submodule "triad"]
+	path = triad
+	url = https://github.com/epfl-labos/TRIAD

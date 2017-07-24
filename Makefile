@@ -1,4 +1,4 @@
-BINARIES = leveldb_bench rangedb_bench flodb_bench hyperleveldb_bench rocksdb_bench
+BINARIES = leveldb_bench rangedb_bench flodb_bench hyperleveldb_bench bashodb_bench rocksdb_bench triad_bench
 CPP_FLAGS = -Wall -Wno-sign-compare -std=c++11
 LIBRARIES = -lpthread -pthread -lsnappy
 #MAKE_JOBS = -j 4  # Uncomment if you want to use multiple parallel jobs
@@ -27,21 +27,33 @@ flodb/libleveldb.a:
 hyperleveldb/.libs/libhyperleveldb.a:
 	cd hyperleveldb; [ -f Makefile ] || (autoreconf -i; ./configure; sed -i '/^EXTRA_CFLAGS =/ s/$$/ -lsnappy/' Makefile); make $(MAKE_JOBS)
 
+bashodb/libleveldb.a:
+	cd bashodb; make $(MAKE_JOBS)
+
 rocksdb/librocksdb.a:
 	cd rocksdb; make $(MAKE_JOBS) static_lib
 
+triad/librocksdb.a:
+	cd triad; make $(MAKE_JOBS) static_lib
+
 leveldb_bench: bench/bench.c leveldb/out-static/libleveldb.a
-	g++ $(CPP_FLAGS) -o $@ $? -Ileveldb/include/ $(LIBRARIES) -DLEVELDB_COMPILE
+	g++ $(CPP_FLAGS) -o $@ $^ -Ileveldb/include/ $(LIBRARIES) -DLEVELDB_COMPILE
 
 rangedb_bench: bench/bench.c rangedb/libleveldb.a
-	g++ $(CPP_FLAGS) -o $@ $? -Irangedb/include/ $(LIBRARIES) -DRANGEDB_COMPILE
+	g++ $(CPP_FLAGS) -o $@ $^ -Irangedb/include/ $(LIBRARIES) -DRANGEDB_COMPILE
 
 flodb_bench: bench/bench.c flodb/libleveldb.a
-	g++ $(CPP_FLAGS) -o $@ $? -Iflodb/include/ $(LIBRARIES) -DFLODB_COMPILE
+	g++ $(CPP_FLAGS) -o $@ $^ -Iflodb/include/ $(LIBRARIES) -DFLODB_COMPILE
 
 hyperleveldb_bench: bench/bench.c hyperleveldb/.libs/libhyperleveldb.a
-	g++ $(CPP_FLAGS) -o $@ $? -Ihyperleveldb/include/ $(LIBRARIES) -DHYPERLEVELDB_COMPILE
+	g++ $(CPP_FLAGS) -o $@ $^ -Ihyperleveldb/include/ $(LIBRARIES) -DHYPERLEVELDB_COMPILE
+
+bashodb_bench: bench/bench.c bashodb/libleveldb.a
+	g++ $(CPP_FLAGS) -o $@ $^ -Ibashodb/include/ -Ibashodb $(LIBRARIES) -DBASHODB_COMPILE
 
 rocksdb_bench: bench/bench.c rocksdb/librocksdb.a
-	g++ $(CPP_FLAGS) -o $@ $? -Irocksdb/include/ $(LIBRARIES) -DROCKSDB_COMPILE
+	g++ $(CPP_FLAGS) -o $@ $^ -Irocksdb/include/ $(LIBRARIES) -DROCKSDB_COMPILE
+
+triad_bench: bench/bench.c triad/librocksdb.a
+	g++ $(CPP_FLAGS) -o $@ $^ -Itriad/include/ $(LIBRARIES) -DTRIAD_COMPILE
 
