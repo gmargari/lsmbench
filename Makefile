@@ -31,10 +31,10 @@ bashodb/libleveldb.a:
 	cd bashodb; make $(MAKE_JOBS)
 
 rocksdb/librocksdb.a:
-	cd rocksdb; make $(MAKE_JOBS) static_lib
+	cd rocksdb; make $(MAKE_JOBS) DEBUG_LEVEL=0 static_lib
 
 triad/librocksdb.a:
-	cd triad; make $(MAKE_JOBS) static_lib
+	cd triad; make $(MAKE_JOBS) DEBUG_LEVEL=0 static_lib
 
 leveldb_bench: bench/bench.c leveldb/out-static/libleveldb.a
 	g++ $(CPP_FLAGS) -o $@ $^ -Ileveldb/include/ $(LIBRARIES) -DLEVELDB_COMPILE
